@@ -78,22 +78,31 @@ function createNewEl(todo) {
     removeBtnEl.classList.add("todo-btn", "remove-btn");
     removeBtnEl.innerHTML = "X";
 
+
+    // 상태 변화에 따른 색상 적용 함수
+    function setCheckboxColor(state) {
+        const color = {
+            todo: "gray",
+            doing: "orange",
+            complete: "yellowgreen",
+        };
+        checkboxEl.style.backgroundColor = color[state] || "gray";
+    }
+    setCheckboxColor(todo.completeState);
+
     checkboxEl.addEventListener("click", () => {
         // console.log("현재 상태: ", todo.completeState);
 
         if(todo.completeState === "todo") {
             todo.completeState = "doing";
-            checkboxEl.style.backgroundColor = "orange";
         }
         else if(todo.completeState === "doing") {
             todo.completeState = "complete";
-            checkboxEl.style.backgroundColor = "yellowgreen";
         }
         else if(todo.completeState === "complete") {
             todo.completeState = "todo";
-            checkboxEl.style.backgroundColor = "gray";
         }
-
+        setCheckboxColor(todo.completeState);
         saveLocalStorage();
     });
 
