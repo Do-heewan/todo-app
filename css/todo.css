@@ -1,0 +1,152 @@
+/* 레이아웃 */
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.app-container {
+    width: 100%;
+    height: 100vh;
+}
+
+.todo-container {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+    max-width: 360px;
+    max-height: 800px;
+    background-color: #EFEBE9;
+}
+
+.todo-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    height: 60px;
+}
+
+.header__profile {
+    width: 40px;
+    height: 40px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+.header__profile img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.todo-header h1{
+    font-size: 20px;
+    color: blue;
+}
+
+.todo-header .header__today {
+    font-size: 18px;
+}
+
+/* 입력창 부분 */
+.todo-input {
+    display: flex;
+    flex: 1;
+    padding: 10px;
+}
+
+.input__container {
+    display: flex;
+    flex: 1;
+}
+
+.input__item-title {
+    flex:1;
+    flex-grow: 1;
+
+    border: none;
+    padding: 8px;
+    height: 40px;
+}
+
+.input__date {
+    border: none;
+    padding: 0px 4px;
+}
+
+.input__add-btn {
+    border: none;
+    background-color: gray;
+    width: 60px;
+    height: 40px;
+}
+
+
+/* 리스트 아이템 관리 부분 */
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+}
+
+.todo {
+    display: flex;
+    align-items: center;
+
+    width: 90%;
+    padding: 5px;
+}
+
+.todo__checkbox {
+    width: 12px;
+    height: 12px;
+    background-color: grey;
+    border: none;
+    margin: 4px;
+}
+
+.todo__content {
+    display: flex;
+    border-bottom: 2px solid black;
+    margin: 5px;
+}
+
+.todo p {
+    padding: 0px 2px 0px 2px ;
+    width: 38px;
+    font-size: 12px;
+    color: gray;
+}
+
+.todo input {
+    background-color: none;
+    background-color: #EFEBE9;
+    border: none;
+    padding: 0px 0px 0px 10px ;
+}
+
+.todo input:focus {
+    outline: none;
+}
+
+.todo-btn {
+    height: 25px;
+    padding: 0px 5px;  
+}

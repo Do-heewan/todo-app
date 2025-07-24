@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./../css/todo.css" />
+</head>
+<body>
+    <div class="app-container">
+        <div class="todo-container">
+            <header class="todo-header">
+                <div class="header__profile">
+                    <img src="./../image/profile.png" />
+                </div>
+                <div>
+                    <h1>My To-do List</h1>
+                    <p class="header__today">
+                        <span class="today-year">20XX</span>.
+                        <span class="today-month">XX</span>.
+                        <span class="today-day">XX</span>.
+                    </p>
+                </div>
+                <div class="header__btns">
+                    <button>필터</button>
+                    <button>차순</button>
+                </div>
+            </header>
+
+            <main class="main-container">
+                <div class="todo-list">
+                    <!-- 리스트 아이템 들어갈 곳 -->
+                    <!-- <div class="todo">
+                        <button class="todo__checkbox"></button>
+                        <div class="todo__content">
+                            <input type="text" placeholder="항목" />
+                            <p>D-<span>0</span></p>
+                        </div>
+                        <button class="todo-btn edit-btn">편집</button>
+                        <button class="todo-btn remove-btn">X</button>
+                    </div> -->
+                </div>
+
+                <div class="todo-input">
+                    <div class="input__container">
+                        <input class="input__item-title" placeholder="항목을 추가해주세요."/>
+                        <input class="input__date" type="date" max="9999-12-31" />
+                    </div>
+                    <button class="input__add-btn">추가</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="./../js/todo.js"></script>
+</body>
+</html>
