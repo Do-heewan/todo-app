@@ -161,4 +161,25 @@ function displayTodos() {
     }
 }
 
+// 정렬 함수
+function sortTodosByCompleteDate() {
+    todos.sort((a, b) => b.completeDate - a.completeDate);
+}
+
+function refreshTodoList() {
+    // 기존 리스트 초기화
+    list.innerHTML = '';
+    
+    // 정렬된 todos 배열로 다시 렌더링
+    todos.forEach(todo => {
+        const { todoEl } = createNewEl(todo);
+        list.append(todoEl);
+    });
+    
+    // localStorage에 저장
+    saveLocalStorage();
+}
+
 displayTodos();
+
+export { sortTodosByCompleteDate, refreshTodoList };
