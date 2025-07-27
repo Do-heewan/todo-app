@@ -7,10 +7,13 @@ const day = document.querySelector(".today-day");
 
 const date = new Date();
 year.innerHTML = date.getFullYear();
-month.innerHTML = date.getMonth();
-day.innerHTML = date.getDate();
+month.innerHTML = formatNumber(date.getMonth() + 1); // 월은 0부터 시작하므로 +1
+day.innerHTML = formatNumber(date.getDate());
 
-
+// 월, 일이 한 자리 수일 경우 앞에 0을 붙이는 함수
+function formatNumber(num) {
+    return num < 10 ? `0${num}` : num;
+}
 
 // 리스트 아이템 관리
 const list = document.querySelector(".todo-list");
