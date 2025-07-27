@@ -29,7 +29,7 @@ function createNewTodo() {
     const todo = {
         id: new Date().getTime(),
         title: inputData.value,
-        completeDate: calculDDay(dateData.value),
+        completeDate: calculDDay(dateData.value) !== 0 ? calculDDay(dateData.value) : 0,
         completeState: "todo", // "todo", "doing", "done" 중 하나
     };
     todos.unshift(todo);
@@ -71,7 +71,7 @@ function createNewEl(todo) {
     inputTextEl.setAttribute("readonly", "true");
 
     const dateEl = document.createElement("p");
-    dateEl.innerHTML = `D-<span>${todo.completeDate}</span>`;
+    dateEl.innerHTML = `D<span>${todo.completeDate === 0 ? "-Day" : todo.completeDate}</span>`; // D
 
     const editBtnEl = document.createElement("button");
     editBtnEl.classList.add("todo-btn", "edit-btn");
