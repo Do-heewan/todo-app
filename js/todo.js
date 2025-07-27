@@ -7,10 +7,13 @@ const day = document.querySelector(".today-day");
 
 const date = new Date();
 year.innerHTML = date.getFullYear();
-month.innerHTML = date.getMonth();
-day.innerHTML = date.getDate();
+month.innerHTML = formatNumber(date.getMonth() + 1); // 월은 0부터 시작하므로 +1
+day.innerHTML = formatNumber(date.getDate());
 
-
+// 월, 일이 한 자리 수일 경우 앞에 0을 붙이는 함수
+function formatNumber(num) {
+    return num < 10 ? `0${num}` : num;
+}
 
 // 리스트 아이템 관리
 const list = document.querySelector(".todo-list");
@@ -26,7 +29,7 @@ function createNewTodo() {
     const todo = {
         id: new Date().getTime(),
         title: inputData.value,
-        completeDate: calculDDay(dateData.value),
+        completeDate: calculDDay(dateData.value) !== 0 ? calculDDay(dateData.value) : 0,
         completeState: "todo", // "todo", "doing", "done" 중 하나
     };
     todos.unshift(todo);
@@ -68,7 +71,7 @@ function createNewEl(todo) {
     inputTextEl.setAttribute("readonly", "true");
 
     const dateEl = document.createElement("p");
-    dateEl.innerHTML = `D-<span>${todo.completeDate}</span>`;
+    dateEl.innerHTML = `D<span>${todo.completeDate === 0 ? "-Day" : todo.completeDate}</span>`; // D
 
     const editBtnEl = document.createElement("button");
     editBtnEl.classList.add("todo-btn", "edit-btn");
