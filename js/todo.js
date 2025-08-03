@@ -22,6 +22,7 @@ const dateData = document.querySelector(".input__date");
 const addBtn = document.querySelector(".input__add-btn");
 
 let todos = [];
+let filteredTodos = []; // 필터링된 todos 배열
 
 addBtn.addEventListener("click", createNewTodo);
 
@@ -169,9 +170,12 @@ function sortTodosByCompleteDate() {
 function refreshTodoList() {
     // 기존 리스트 초기화
     list.innerHTML = '';
+
+    // 필터링된 todos가 있으면 그것을 사용, 없으면 전체 todos 사용
+    const todosToDisplay = filteredTodos.length > 0 ? filteredTodos : todos;
     
     // 정렬된 todos 배열로 다시 렌더링
-    todos.forEach(todo => {
+    todosToDisplay.forEach(todo => {
         const { todoEl } = createNewEl(todo);
         list.append(todoEl);
     });
@@ -180,6 +184,16 @@ function refreshTodoList() {
     saveLocalStorage();
 }
 
+// todos 배열 반환
+function getTodos() {
+    return todos;
+}
+
+// 필터링된 todos 배열 설정
+function setFilteredTodos(filtered) {
+    filteredTodos = filtered;
+}
+
 displayTodos();
 
-export { sortTodosByCompleteDate, refreshTodoList };
+export { sortTodosByCompleteDate, refreshTodoList, getTodos, setFilteredTodos };
