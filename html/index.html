@@ -1,14 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>to-do App</title>
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="./../css/feed.css">
+
 </head>
 <body>
-    <h1>메인 페이지</h1>
-    <button onclick="goToTodoPage()">todo 페이지로 이동</button>
-    
-    <script src="./../js/script.js"></script>
+<div class="main-container">
+    <!-- 좌상단: 프로필 정보 -->
+    <div class="personalInfo">
+        <div class="profile-img">
+            <div class="profile-icon"></div>
+        </div>
+        <div class="user-info">사용자 정보</div>
+    </div>
+
+    <!-- 우상단: ToDo 표시 -->
+    <div class="todoList">
+        <div class="info-display">
+            오늘의 TODO
+
+            <button onclick="goToTodoPage()">todo 페이지로 이동</button>
+        </div>
+    </div>
+
+    <!-- 좌하단: 메모 -->
+    <div class="memo">
+        <textarea placeholder="메모를 입력하세요..." id="memo-textarea"></textarea>
+    </div>
+
+    <!-- 우하단: 달력 -->
+    <div class="rightContent">
+        <div class="calendar-title">달력</div>
+        <div class="calendar">
+            <div class="calendar-header">
+                <button id="prev-month" class="calendar-nav">‹</button>
+                <div class="current-month" id="current-month"></div>
+                <button id="next-month" class="calendar-nav">›</button>
+            </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
+        </div>
+    </div>
+
+    <!-- 내보내기 버튼 -->
+    <button id="export-btn" class="export">내보내기</button>
+</div>
+
+<script src="./../js/feed.js"></script>
+
 </body>
 </html>
