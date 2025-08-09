@@ -7,10 +7,13 @@ const day = document.querySelector(".today-day");
 
 const date = new Date();
 year.innerHTML = date.getFullYear();
-month.innerHTML = date.getMonth();
-day.innerHTML = date.getDate();
+month.innerHTML = formatNumber(date.getMonth() + 1); // 월은 0부터 시작하므로 +1
+day.innerHTML = formatNumber(date.getDate());
 
-
+// 월, 일이 한 자리 수일 경우 앞에 0을 붙이는 함수
+function formatNumber(num) {
+    return num < 10 ? `0${num}` : num;
+}
 
 // 리스트 아이템 관리
 const list = document.querySelector(".todo-list");
@@ -19,6 +22,7 @@ const dateData = document.querySelector(".input__date");
 const addBtn = document.querySelector(".input__add-btn");
 
 let todos = [];
+let filteredTodos = []; // 필터링된 todos 배열
 
 addBtn.addEventListener("click", createNewTodo);
 
@@ -26,7 +30,7 @@ function createNewTodo() {
     const todo = {
         id: new Date().getTime(),
         title: inputData.value,
-        completeDate: calculDDay(dateData.value),
+        completeDate: calculDDay(dateData.value) !== 0 ? calculDDay(dateData.value) : 0,
         completeState: "todo", // "todo", "doing", "done" 중 하나
     };
     todos.unshift(todo);
@@ -68,7 +72,7 @@ function createNewEl(todo) {
     inputTextEl.setAttribute("readonly", "true");
 
     const dateEl = document.createElement("p");
-    dateEl.innerHTML = `D-<span>${todo.completeDate}</span>`;
+    dateEl.innerHTML = `D<span>${todo.completeDate === 0 ? "-Day" : todo.completeDate}</span>`; // D
 
     const editBtnEl = document.createElement("button");
     editBtnEl.classList.add("todo-btn", "edit-btn");
@@ -78,22 +82,31 @@ function createNewEl(todo) {
     removeBtnEl.classList.add("todo-btn", "remove-btn");
     removeBtnEl.innerHTML = "X";
 
+
+    // 상태 변화에 따른 색상 적용 함수
+    function setCheckboxColor(state) {
+        const color = {
+            todo: "gray",
+            doing: "orange",
+            complete: "yellowgreen",
+        };
+        checkboxEl.style.backgroundColor = color[state] || "gray";
+    }
+    setCheckboxColor(todo.completeState);
+
     checkboxEl.addEventListener("click", () => {
         // console.log("현재 상태: ", todo.completeState);
 
         if(todo.completeState === "todo") {
             todo.completeState = "doing";
-            checkboxEl.style.backgroundColor = "orange";
         }
         else if(todo.completeState === "doing") {
             todo.completeState = "complete";
-            checkboxEl.style.backgroundColor = "yellowgreen";
         }
         else if(todo.completeState === "complete") {
             todo.completeState = "todo";
-            checkboxEl.style.backgroundColor = "gray";
         }
-
+        setCheckboxColor(todo.completeState);
         saveLocalStorage();
     });
 
@@ -149,4 +162,38 @@ function displayTodos() {
     }
 }
 
+// 정렬 함수
+function sortTodosByCompleteDate() {
+    todos.sort((a, b) => b.completeDate - a.completeDate);
+}
+
+function refreshTodoList() {
+    // 기존 리스트 초기화
+    list.innerHTML = '';
+
+    // 필터링된 todos가 있으면 그것을 사용, 없으면 전체 todos 사용
+    const todosToDisplay = filteredTodos.length > 0 ? filteredTodos : todos;
+    
+    // 정렬된 todos 배열로 다시 렌더링
+    todosToDisplay.forEach(todo => {
+        const { todoEl } = createNewEl(todo);
+        list.append(todoEl);
+    });
+    
+    // localStorage에 저장
+    saveLocalStorage();
+}
+
+// todos 배열 반환
+function getTodos() {
+    return todos;
+}
+
+// 필터링된 todos 배열 설정
+function setFilteredTodos(filtered) {
+    filteredTodos = filtered;
+}
+
 displayTodos();
+
+export { sortTodosByCompleteDate, refreshTodoList, getTodos, setFilteredTodos };

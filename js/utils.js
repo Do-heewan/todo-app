@@ -10,5 +10,7 @@ export function calculDDay(targetDate) {
     const diffTime = targetDateObject.getTime() - today.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    return diffDays;
+    return diffDays < 0 ? "+" + Math.abs(diffDays) :
+            diffDays > 0 ? "-" + diffDays :
+            0;
 }
